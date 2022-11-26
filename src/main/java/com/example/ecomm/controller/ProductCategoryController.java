@@ -16,7 +16,7 @@ import com.example.ecomm.service.ProductCategoryService;
 
 @RestController
 @RequestMapping("/category")
-@CrossOrigin
+@CrossOrigin(origins ="null", allowedHeaders = "*")
 public class ProductCategoryController {
     
 

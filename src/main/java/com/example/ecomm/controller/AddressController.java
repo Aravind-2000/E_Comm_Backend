@@ -11,7 +11,7 @@ import com.example.ecomm.service.AddressService;
 
 @RestController
 @RequestMapping("/address")
-@CrossOrigin
+@CrossOrigin(origins ="null", allowedHeaders = "*")
 public class AddressController {
 
 

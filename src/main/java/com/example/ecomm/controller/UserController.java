@@ -17,7 +17,7 @@ import com.example.ecomm.service.UserService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
+@CrossOrigin(origins ="null", allowedHeaders = "*")
 public class UserController {
 
 
