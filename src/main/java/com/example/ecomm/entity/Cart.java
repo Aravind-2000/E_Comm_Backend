@@ -1,6 +1,8 @@
 package com.example.ecomm.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -21,11 +23,8 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Integer productId;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "productId",insertable = false, updatable = false)
-	private Product productDetails;
+	@ManyToMany(mappedBy = "addedCarts")
+	private List<Product> productsInCart = new ArrayList<>();
 	
 	private Integer userId;
 	
@@ -40,5 +39,14 @@ public class Cart {
 	@UpdateTimestamp
 	@JsonIgnore
 	private LocalDateTime modifiedDateTime;
+
+
+	public void addProduct(Product product) {
+		productsInCart.add(product);
+	}
+
+	public void removeProduct(Product product) {
+		productsInCart.remove(product);
+	}
 
 }

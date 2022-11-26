@@ -1,6 +1,8 @@
 package com.example.ecomm.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -49,6 +53,14 @@ public class Product {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "productCategoryId", insertable = false, updatable = false)
 	private ProductCategory productCategory;
+
+
+	@ManyToMany
+	@JsonIgnore
+	@JoinTable(name = "carts_products", 
+			joinColumns = @JoinColumn(name = "cart_id"), 
+			inverseJoinColumns = @JoinColumn(name="product_id"))
+	private List<Cart> addedCarts = new ArrayList<>();
 	
 	@CreationTimestamp
 	@JsonIgnore
