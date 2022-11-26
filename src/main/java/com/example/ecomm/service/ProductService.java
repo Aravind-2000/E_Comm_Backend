@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.ecomm.entity.Cart;
 import com.example.ecomm.entity.Product;
+import com.example.ecomm.repository.CartRepository;
 import com.example.ecomm.repository.ProductRepository;
 
 
@@ -14,6 +16,9 @@ public class ProductService {
 	
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private CartRepository cartRepository;
 	
 	
 	public List<Product> getAllProducts(){
@@ -32,6 +37,32 @@ public class ProductService {
 	public String deleteProduct(int pId) {
 		productRepository.deleteById(pId);
 		return "Product deleted successfully";
+	}
+
+
+	public String addProductToCart(int productId, int cartId) {
+		if (productRepository.findById(productId).isPresent()) {
+			if (cartRepository.findById(cartId).isPresent()) {
+				Product product = productRepository.getReferenceById(productId);
+				Cart cart = cartRepository.getReferenceById(cartId);
+				if (!cart.getProductsInCart().contains(product)) {
+					cart.addProduct(product);
+					cartRepository.save(cart);
+					return "Product Added in cart Successfully";
+				} else {
+					return "Product Already in cart";
+				}
+			}
+		}
+		return "Product not found";
+	}
+
+	public String removeProductFromCart(int productId, int cartId) {
+		Product product = productRepository.getReferenceById(productId);
+		Cart cart = cartRepository.getReferenceById(cartId);
+		cart.removeProduct(product);
+		cartRepository.save(cart);
+		return "Product Removed from cart successfully";
 	}
 	
 	
