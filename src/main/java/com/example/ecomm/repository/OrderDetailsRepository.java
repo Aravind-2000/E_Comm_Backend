@@ -6,4 +6,6 @@ import com.example.ecomm.entity.OrderDetails;
 
 public interface OrderDetailsRepository extends JpaRepository<OrderDetails, Integer> {
 
+    public OrderDetails getByUserId(int userId);
+
 }
