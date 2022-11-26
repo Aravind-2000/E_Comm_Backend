@@ -1,5 +1,6 @@
 package com.example.ecomm.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
@@ -21,15 +22,17 @@ public class Coupon {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Integer userId;
-	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinColumn(name = "userId",insertable = false, updatable = false)
-	private User userDetails;
-	
 	private String couponCode;
 	
 	private Integer couponDiscount;
+
+	private LocalDate expiryDate;
+
+	private Integer eventId;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "eventId", insertable = false, updatable = false)
+	private Event eventDetails;
 	
 	@CreationTimestamp
 	@JsonIgnore
