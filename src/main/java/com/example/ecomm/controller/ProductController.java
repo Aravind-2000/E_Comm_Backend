@@ -35,6 +35,12 @@ public class ProductController {
         return productService.saveProduct(product);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable int id) {
+        productService.deleteProduct(id);
+        return "Product Deleted";
+    }
+
     @PutMapping("/addtocart/{productid}/{cartid}")
     public ResponseEntity<?> addToCart(@PathVariable int productid, @PathVariable int cartid) {
         return ResponseEntity.ok(productService.addProductToCart(productid, cartid));
