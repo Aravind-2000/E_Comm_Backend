@@ -16,25 +16,23 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductCategory {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(length = 20)
 	private String categoryName;
-	
-	@Column(length = 100)
+
+	@Lob
 	private String categoryDescription;
-	
+
 	@CreationTimestamp
 	@JsonIgnore
 	private LocalDateTime createdDateTime;
-	
+
 	@UpdateTimestamp
 	@JsonIgnore
 	private LocalDateTime modifiedDateTime;
-	
 
 }
