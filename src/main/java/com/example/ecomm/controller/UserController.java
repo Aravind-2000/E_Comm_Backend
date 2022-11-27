@@ -13,32 +13,32 @@ import com.example.ecomm.entity.SignupRequest;
 import com.example.ecomm.entity.User;
 import com.example.ecomm.service.UserService;
 
-
-
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins ="null", allowedHeaders = "*")
+@CrossOrigin
 public class UserController {
 
-
-    @Autowired
+	@Autowired
 	private UserService userService;
-	
-	
+
 	@PostMapping("/logindetails")
 	public ResponseEntity<?> loginController(@RequestBody LoginRequest loginCredentials) {
 		User user = userService.loginService(loginCredentials.getEmail(), loginCredentials.getPassword());
 		if (user != null) {
 			return ResponseEntity.ok(user);
-		}
-		else {
+		} else {
 			return ResponseEntity.badRequest().body("Bad Credentials");
 		}
 	}
-	
+
 	@PostMapping("/signup")
-	public ResponseEntity<?> signupControllerCustomer(@RequestBody SignupRequest signupRequest){
+	public ResponseEntity<?> signupControllerCustomer(@RequestBody SignupRequest signupRequest) {
 		return ResponseEntity.ok(userService.signupServiceCustomer(signupRequest));
 	}
-    
+
+	@PostMapping("/adminsignup")
+	public ResponseEntity<?> signupControllerAdmin(@RequestBody SignupRequest signupRequest) {
+		return ResponseEntity.ok(userService.signupService(signupRequest));
+	}
+
 }
