@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -27,8 +28,10 @@ public class Event {
 
     private String eventName;
 
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate eventStartDate;
 
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate eventEndDate;
     
     @CreationTimestamp
