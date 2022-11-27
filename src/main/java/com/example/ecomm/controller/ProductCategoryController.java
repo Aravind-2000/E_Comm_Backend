@@ -13,16 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ecomm.entity.ProductCategory;
 import com.example.ecomm.service.ProductCategoryService;
 
-
 @RestController
 @RequestMapping("/category")
-@CrossOrigin(origins ="null", allowedHeaders = "*")
+@CrossOrigin
 public class ProductCategoryController {
-    
 
-    @Autowired 
+    @Autowired
     private ProductCategoryService productCategoryService;
-
 
     @GetMapping("/getall")
     public List<ProductCategory> getAll() {

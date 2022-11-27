@@ -14,7 +14,7 @@ import com.example.ecomm.repository.EventRepository;
 
 @RestController
 @RequestMapping("/event")
-@CrossOrigin(origins = "null", allowedHeaders = "*")
+@CrossOrigin
 public class EventController {
 
     @Autowired

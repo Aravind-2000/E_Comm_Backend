@@ -1,7 +1,5 @@
 package com.example.ecomm.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,30 +10,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ecomm.entity.OrderDetails;
-import com.example.ecomm.repository.OrderDetailsRepository;
+import com.example.ecomm.entity.Cart;
+import com.example.ecomm.repository.CartRepository;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/cart")
 @CrossOrigin
-public class OrderController {
+public class CartController {
 
     @Autowired
-    private OrderDetailsRepository ordersRepository;
+    private CartRepository cartRepository;
 
-    @GetMapping("/getorderbyuser/{userid}")
+    @GetMapping("/getbyuser/{userid}")
     public ResponseEntity<?> getByUser(@PathVariable int userid) {
-        List<OrderDetails> orderDetails = ordersRepository.getByUserId(userid);
-        if (orderDetails != null) {
-            return ResponseEntity.ok(orderDetails);
+        Cart cart = cartRepository.getByUserId(userid);
+        if (cart == null) {
+            return ResponseEntity.ok("NULL");
         } else {
-            return ResponseEntity.ok("Empty");
+            return ResponseEntity.ok(cart);
         }
     }
 
-    @PostMapping("/placeorder")
-    public ResponseEntity<?> placeOrder(@RequestBody OrderDetails orderDetails) {
-        ordersRepository.save(orderDetails);
-        return ResponseEntity.ok("Order Placed");
+    @GetMapping("/getcartid/{userid}")
+    public int getCartId(@PathVariable int userid) {
+        return cartRepository.getCartId(userid);
     }
+
+    @PostMapping("/add")
+    public String addCart(@RequestBody Cart cart) {
+        cartRepository.save(cart);
+        return "Cart Added";
+    }
+
 }

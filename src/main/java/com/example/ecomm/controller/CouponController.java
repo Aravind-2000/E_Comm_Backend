@@ -16,16 +16,14 @@ import com.example.ecomm.repository.EventRepository;
 
 @RestController
 @RequestMapping("/coupon")
-@CrossOrigin(origins ="null", allowedHeaders = "*")
+@CrossOrigin
 public class CouponController {
-
 
     @Autowired
     private CouponRepository couponRepository;
 
     @Autowired
     private EventRepository eventRepository;
-
 
     @GetMapping("/getall")
     public ResponseEntity<?> getall() {
@@ -41,7 +39,5 @@ public class CouponController {
         couponRepository.save(coupon);
         return ResponseEntity.ok("Coupon Added");
     }
-    
 
-    
 }
