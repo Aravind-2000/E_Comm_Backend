@@ -24,7 +24,7 @@ public class ProductService {
 	}
 
 	public Product getProduct(int pId) {
-		return productRepository.getReferenceById(pId);
+		return productRepository.geProduct(pId);
 	}
 
 	public String saveProduct(Product product) {
