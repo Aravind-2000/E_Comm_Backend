@@ -66,17 +66,4 @@ public class UserService {
 		return "User deleted successfully";
 	}
 
-	public String encryptPassword(String pass) {
-
-		String encryptedPassword = "";
-
-		return encryptedPassword;
-	}
-
-	public String decryptPassword(String pass) {
-
-		String originalPassword = "";
-
-		return originalPassword;
-	}
 }
