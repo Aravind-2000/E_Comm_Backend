@@ -2,12 +2,7 @@ package com.example.ecomm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.ecomm.entity.Coupon;
 import com.example.ecomm.entity.Event;
@@ -38,6 +33,11 @@ public class CouponController {
         }
         couponRepository.save(coupon);
         return ResponseEntity.ok("Coupon Added");
+    }
+
+    @GetMapping("/getcoupondiscount/{couponCode}")
+    public int getDiscount(@PathVariable String couponCode){
+        return couponRepository.getCouponDiscount(couponCode);
     }
 
 }
