@@ -55,8 +55,8 @@ public class UserService {
 			User user = new User(signupRequest.getUsername(), signupRequest.getPassword(),
 					signupRequest.getEmail(), signupRequest.getPhoneNumber(), 1, signupRequest.getProfilePicture());
 			userRepository.save(user);
-			Cart cart = new Cart(user.getUserId());
-			cartRepository.save(cart);
+//			Cart cart = new Cart(user.getUserId());
+//			cartRepository.save(cart);
 			return "Admin added";
 		}
 	}
