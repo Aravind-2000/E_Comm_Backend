@@ -32,9 +32,35 @@ public class ProductService {
 		return "Product Added successfully";
 	}
 
-	public String deleteProduct(int pId) {
+	public void deleteProduct(int pId) {
 		productRepository.deleteById(pId);
-		return "Product deleted successfully";
+	}
+
+	public String editProduct(int pid, Product newProduct){
+		Product oldProduct = productRepository.getReferenceById(pid);
+
+		if(newProduct.getProductName() != null){
+			oldProduct.setProductName(newProduct.getProductName());
+		}
+
+		if(newProduct.getProductDescription() != null){
+			oldProduct.setProductDescription(oldProduct.getProductDescription());
+		}
+
+		if(newProduct.getProductCategoryId() != null){
+			oldProduct.setProductCategoryId(newProduct.getProductCategoryId());
+		}
+
+		if(newProduct.getProductPrice() != null){
+			oldProduct.setProductPrice(newProduct.getProductPrice());
+		}
+
+		if(newProduct.getProductImage() != null){
+			oldProduct.setProductImage(newProduct.getProductImage());
+		}
+
+		productRepository.save(oldProduct);
+		return "Product Modified successfully";
 	}
 
 	public String addProductToCart(int productId, int cartId) {
