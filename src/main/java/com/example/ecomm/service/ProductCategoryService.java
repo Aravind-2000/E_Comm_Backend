@@ -34,4 +34,20 @@ public class ProductCategoryService {
 		categoryRepository.deleteById(id);
 		return "Deleted Successfully";
 	}
+
+	public String editCategory(int cid, ProductCategory newCategory){
+
+		ProductCategory oldCategory = categoryRepository.getReferenceById(cid);
+
+		if(newCategory.getCategoryName() != null){
+			oldCategory.setCategoryName(newCategory.getCategoryName());
+		}
+
+		if(newCategory.getCategoryDescription() != null){
+			oldCategory.setCategoryDescription(newCategory.getCategoryDescription());
+		}
+
+		categoryRepository.save(oldCategory);
+		return "Product Category modified successfully";
+	}
 }
