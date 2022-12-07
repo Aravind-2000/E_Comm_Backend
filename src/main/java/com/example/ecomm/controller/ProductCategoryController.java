@@ -3,6 +3,7 @@ package com.example.ecomm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.ecomm.entity.ProductCategory;
@@ -29,6 +30,11 @@ public class ProductCategoryController {
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable int id){
         return productCategoryService.deleteCategory(id);
+    }
+
+    @PatchMapping("/edit/{id}")
+    public ResponseEntity<?> editCategory(@PathVariable int id, @RequestBody ProductCategory category){
+        return ResponseEntity.ok(productCategoryService.editCategory(id, category));
     }
 
 }

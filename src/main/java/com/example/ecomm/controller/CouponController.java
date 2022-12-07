@@ -40,4 +40,31 @@ public class CouponController {
         return couponRepository.getCouponDiscount(couponCode);
     }
 
+
+    @PatchMapping("/edit/{id}")
+    public ResponseEntity<?> editCoupon(@PathVariable int id, Coupon newCoupon){
+
+        Coupon oldCoupon = couponRepository.getReferenceById(id);
+
+        if(newCoupon.getCouponCode() != null){
+            oldCoupon.setCouponCode(newCoupon.getCouponCode());
+        }
+
+        if(newCoupon.getCouponDiscount() != null){
+            oldCoupon.setCouponDiscount(newCoupon.getCouponDiscount());
+        }
+
+        if(newCoupon.getExpiryDate() != null){
+            oldCoupon.setExpiryDate(newCoupon.getExpiryDate());
+        }
+
+        if(newCoupon.getEventId() != null){
+            oldCoupon.setEventId(newCoupon.getEventId());
+        }
+
+        couponRepository.save(oldCoupon);
+        return ResponseEntity.ok("Coupon Modified Successfully");
+
+    }
+
 }
