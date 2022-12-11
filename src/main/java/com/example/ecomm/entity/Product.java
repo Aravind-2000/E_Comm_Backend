@@ -68,6 +68,9 @@ public class Product {
 	@JsonIgnore
 	private LocalDateTime modifiedDateTime;
 
+	@JsonIgnore
+	private int isAvailable;
+
 	public void addProduct(Cart cart) {
 		addedCarts.add(cart);
 	}
