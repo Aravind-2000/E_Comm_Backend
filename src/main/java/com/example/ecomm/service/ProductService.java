@@ -20,7 +20,7 @@ public class ProductService {
 	private CartRepository cartRepository;
 
 	public List<Product> getAllProducts() {
-		return productRepository.findAll();
+		return productRepository.availableProducts();
 	}
 
 	public Product getProduct(int pId) {
@@ -28,34 +28,37 @@ public class ProductService {
 	}
 
 	public String saveProduct(Product product) {
+		product.setIsAvailable(1);
 		productRepository.save(product);
 		return "Product Added successfully";
 	}
 
 	public void deleteProduct(int pId) {
-		productRepository.deleteById(pId);
+		Product product = productRepository.getReferenceById(pId);
+		product.setIsAvailable(0);
+		productRepository.save(product);
 	}
 
-	public String editProduct(int pid, Product newProduct){
+	public String editProduct(int pid, Product newProduct) {
 		Product oldProduct = productRepository.getReferenceById(pid);
 
-		if(newProduct.getProductName() != null){
+		if (newProduct.getProductName() != null) {
 			oldProduct.setProductName(newProduct.getProductName());
 		}
 
-		if(newProduct.getProductDescription() != null){
+		if (newProduct.getProductDescription() != null) {
 			oldProduct.setProductDescription(oldProduct.getProductDescription());
 		}
 
-		if(newProduct.getProductCategoryId() != null){
+		if (newProduct.getProductCategoryId() != null) {
 			oldProduct.setProductCategoryId(newProduct.getProductCategoryId());
 		}
 
-		if(newProduct.getProductPrice() != null){
+		if (newProduct.getProductPrice() != null) {
 			oldProduct.setProductPrice(newProduct.getProductPrice());
 		}
 
-		if(newProduct.getProductImage() != null){
+		if (newProduct.getProductImage() != null) {
 			oldProduct.setProductImage(newProduct.getProductImage());
 		}
 
