@@ -32,7 +32,7 @@ public class Coupon {
 
 	private Integer eventId;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "eventId", insertable = false, updatable = false)
 	private Event eventDetails;
 
