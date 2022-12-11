@@ -23,14 +23,14 @@ public class OrderDetails {
 
 	private Integer productId;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "productId", insertable = false, updatable = false)
 	private Product productDetails;
 
 	private String status;
 	private Integer userId;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", insertable = false, updatable = false)
 	private User userDetails;
 
