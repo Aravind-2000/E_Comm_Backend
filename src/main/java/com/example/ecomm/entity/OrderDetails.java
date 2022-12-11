@@ -1,14 +1,10 @@
 package com.example.ecomm.entity;
 
 import java.time.LocalDateTime;
-
 import javax.persistence.*;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Getter;
 import lombok.Setter;
 
