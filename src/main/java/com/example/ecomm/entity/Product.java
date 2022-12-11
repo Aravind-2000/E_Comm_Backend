@@ -3,8 +3,6 @@ package com.example.ecomm.entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,7 +47,7 @@ public class Product {
 
 	private Integer productCategoryId;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "productCategoryId", insertable = false, updatable = false)
 	private ProductCategory productCategory;
 
