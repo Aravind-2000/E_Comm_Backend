@@ -28,9 +28,9 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
+    public ResponseEntity<?> delete(@PathVariable int id) {
         productService.deleteProduct(id);
-        return "Product Deleted";
+        return ResponseEntity.ok("Product removed successfully");
     }
 
     @GetMapping("/get/{id}")
@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     @PatchMapping("/edit/{id}")
-    public ResponseEntity<?> editProduct(@PathVariable int id, @RequestBody Product product){
+    public ResponseEntity<?> editProduct(@PathVariable int id, @RequestBody Product product) {
         return ResponseEntity.ok(productService.editProduct(id, product));
     }
 
