@@ -36,35 +36,40 @@ public class CouponController {
     }
 
     @GetMapping("/getcoupondiscount/{couponCode}")
-    public int getDiscount(@PathVariable String couponCode){
+    public int getDiscount(@PathVariable String couponCode) {
         return couponRepository.getCouponDiscount(couponCode);
     }
 
-
     @PatchMapping("/edit/{id}")
-    public ResponseEntity<?> editCoupon(@PathVariable int id, Coupon newCoupon){
+    public ResponseEntity<?> editCoupon(@PathVariable int id, Coupon newCoupon) {
 
         Coupon oldCoupon = couponRepository.getReferenceById(id);
 
-        if(newCoupon.getCouponCode() != null){
+        if (newCoupon.getCouponCode() != null) {
             oldCoupon.setCouponCode(newCoupon.getCouponCode());
         }
 
-        if(newCoupon.getCouponDiscount() != null){
+        if (newCoupon.getCouponDiscount() != null) {
             oldCoupon.setCouponDiscount(newCoupon.getCouponDiscount());
         }
 
-        if(newCoupon.getExpiryDate() != null){
+        if (newCoupon.getExpiryDate() != null) {
             oldCoupon.setExpiryDate(newCoupon.getExpiryDate());
         }
 
-        if(newCoupon.getEventId() != null){
+        if (newCoupon.getEventId() != null) {
             oldCoupon.setEventId(newCoupon.getEventId());
         }
 
         couponRepository.save(oldCoupon);
         return ResponseEntity.ok("Coupon Modified Successfully");
 
+    }
+
+    @DeleteMapping("/delete/{id}")
+    ResponseEntity<?> deleteCoupon(@PathVariable int id) {
+        couponRepository.deleteById(id);
+        return ResponseEntity.ok("Coupon Deleted");
     }
 
 }
