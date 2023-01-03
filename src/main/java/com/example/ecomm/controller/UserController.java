@@ -33,12 +33,12 @@ public class UserController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> signupControllerCustomer(@RequestBody SignupRequest signupRequest) {
-		return ResponseEntity.ok(userService.signupServiceCustomer(signupRequest));
+		return userService.signupServiceCustomer(signupRequest);
 	}
 
 	@PostMapping("/adminsignup")
 	public ResponseEntity<?> signupControllerAdmin(@RequestBody SignupRequest signupRequest) {
-		return ResponseEntity.ok(userService.signupService(signupRequest));
+		return userService.signupService(signupRequest);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.example.ecomm.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.ecomm.entity.Cart;
@@ -27,10 +28,10 @@ public class UserService {
 		}
 	}
 
-	public String signupServiceCustomer(SignupRequest signupRequest) {
+	public ResponseEntity<?> signupServiceCustomer(SignupRequest signupRequest) {
 
-		if (userRepository.existsByUserEmail(signupRequest.getEmail())) {
-			return "Email already exists";
+		if (userRepository.existsByUserEmailAndRoleFlag(signupRequest.getEmail(), 0)) {
+			return ResponseEntity.badRequest().body("Email already exists");
 		}
 
 		else {
@@ -40,14 +41,14 @@ public class UserService {
 			userRepository.save(user);
 			Cart cart = new Cart(user.getUserId());
 			cartRepository.save(cart);
-			return "Customer added";
+			return ResponseEntity.ok("Customer added");
 		}
 
 	}
 
-	public String signupService(SignupRequest signupRequest) {
-		if (userRepository.existsByUserEmail(signupRequest.getEmail())) {
-			return "Email already exists";
+	public ResponseEntity<?> signupService(SignupRequest signupRequest) {
+		if (userRepository.existsByUserEmailAndRoleFlag(signupRequest.getEmail(), 1)) {
+			return ResponseEntity.badRequest().body("Email already exists");
 		}
 
 		else {
@@ -55,9 +56,9 @@ public class UserService {
 			User user = new User(signupRequest.getUsername(), signupRequest.getPassword(),
 					signupRequest.getEmail(), signupRequest.getPhoneNumber(), 1, signupRequest.getProfilePicture());
 			userRepository.save(user);
-//			Cart cart = new Cart(user.getUserId());
-//			cartRepository.save(cart);
-			return "Admin added";
+			// Cart cart = new Cart(user.getUserId());
+			// cartRepository.save(cart);
+			return ResponseEntity.ok("Customer added");
 		}
 	}
 
