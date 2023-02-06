@@ -10,6 +10,8 @@ import com.example.ecomm.entity.User;
 import com.example.ecomm.repository.CartRepository;
 import com.example.ecomm.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -18,6 +20,11 @@ public class UserService {
 
 	@Autowired
 	private CartRepository cartRepository;
+
+
+	public List<User> getUsers(){
+		return userRepository.findAll();
+	}
 
 	public User loginService(String email, String password) {
 		User user = userRepository.login(email, password);
